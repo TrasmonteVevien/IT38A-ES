@@ -1,0 +1,35 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+}
+.sidebar {
+    width: 250px;
+    background: #2C3E50;
+    color: white;
+    height: 100vh;
+    padding: 20px;
+}
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+.sidebar ul li {
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.sidebar ul li:hover {
+    background: #34495E;
+}
+.submenu {
+    display: none;
+    padding-left: 15px;
+}
+.sidebar ul li.active .submenu {
+    display: block;
+}
