@@ -24,7 +24,7 @@ body {
     transition: background 0.3s;
 }
 .sidebar ul li:hover {
-    background: #34495E;
+    background: #2f4357;
 }
 .submenu {
     display: none;
