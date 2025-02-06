@@ -1,0 +1,43 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimalist Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Dashboard</h2>
+        <ul>
+            <li>Reports</li>
+            <li class="has-submenu">Accounts
+                <ul class="submenu">
+                    <li>Users</li>
+                    <li>Temp Users</li>
+                    <li>Total Number of Users</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <script>
+        document.querySelectorAll('.has-submenu').forEach(item => {
+            item.addEventListener('click', (e) => {
+             
+                e.stopPropagation();
+                item.classList.toggle('active');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.sidebar')) {
+                document.querySelectorAll('.has-submenu').forEach(item => {
+                    item.classList.remove('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
