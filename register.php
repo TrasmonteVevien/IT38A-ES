@@ -150,7 +150,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         .btn-primary {
             background-color: #4e73df;
             border-color: #4e73df;
-            padding: 10px 20px;
+            padding: 10px 10px;
             font-size: 16px;
             width: 100%;
             border-radius: 5px;
@@ -161,17 +161,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             background-color: #2e59d9;
             border-color: #2e59d9;
         }
-
-.btn-secondary {
-    background-color: #808080;
-    border-color: #808080;
-    color: white;
-}
-
-.btn-secondary:hover {
-    background-color: #6d6d6d;
-    border-color: #6d6d6d;
-}
 
 .alert {
     margin-bottom: 20px;
@@ -217,7 +206,6 @@ a:hover {
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Submit">
-                <input type="reset" class="btn btn-secondary ml-2" value="Reset">
             </div>
             <p>Already have an account? <a href="index.php">Login here...</a>.</p>
         </form>
