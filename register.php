@@ -100,7 +100,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <title>Sign Up</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        body {
+      
+      body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f7fc;
             color: #333;
@@ -161,39 +162,36 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             border-color: #2e59d9;
         }
 
-        .btn-secondary {
-            background-color: #f0f0f0;
-            border-color: #f0f0f0;
-            padding: 10px 20px;
-            font-size: 16px;
-            width: 100%;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
+.btn-secondary {
+    background-color: #808080;
+    border-color: #808080;
+    color: white;
+}
 
-        .btn-secondary:hover {
-            background-color: #e0e0e0;
-            border-color: #e0e0e0;
-        }
+.btn-secondary:hover {
+    background-color: #6d6d6d;
+    border-color: #6d6d6d;
+}
 
-        .alert {
-            margin-bottom: 20px;
-            text-align: center;
-        }
+.alert {
+    margin-bottom: 20px;
+    text-align: center;
+}
 
-        .invalid-feedback {
-            font-size: 14px;
-            color: #e74a3b;
-        }
+.invalid-feedback {
+    font-size: 14px;
+    color: #e74a3b;
+}
 
-        a {
-            color: #4e73df;
-            text-decoration: none;
-        }
+a {
+    color: #4e73df;
+    text-decoration: none;
+}
 
-        a:hover {
-            text-decoration: underline;
-        }
+a:hover {
+    text-decoration: underline;
+}
+
 
     </style>
 </head>
