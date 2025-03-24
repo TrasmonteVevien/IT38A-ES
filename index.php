@@ -93,74 +93,81 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7fc;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-        .wrapper {
-            width: 100%;
-            max-width: 400px;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin: 50px auto;
-        }
-        h2 {
-            color: #4e73df;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        p {
-            text-align: center;
-            font-size: 16px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-control {
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            padding: 10px;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-        .form-control:focus {
-            border-color: #4e73df;
-            box-shadow: 0 0 8px rgba(78, 115, 223, 0.5);
-        }
-        .btn-primary {
-            background-color: #4e73df;
-            border-color: #4e73df;
-            padding: 10px 20px;
-            font-size: 16px;
-            width: 100%;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-        .btn-primary:hover {
-            background-color: #2e59d9;
-            border-color: #2e59d9;
-        }
-        .alert {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .invalid-feedback {
-            font-size: 14px;
-            color: #e74a3b;
-        }
-        a {
-            color: #4e73df;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f0f0;
+        color: #000;
+        margin: 0;
+        padding: 0;
+    }
+    .wrapper {
+        width: 100%;
+        max-width: 400px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin: 50px auto;
+    }
+    h2 {
+        color: #000;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    p {
+        text-align: center;
+        font-size: 16px;
+        color: #222;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    .form-control {
+        border-radius: 5px;
+        border: 1px solid #666;
+        padding: 10px;
+        font-size: 14px;
+        color: #000;
+        background-color: #fff;
+        transition: all 0.3s ease;
+    }
+    .form-control:focus {
+        border-color: #000;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    }
+    .btn-primary {
+        background-color: #000;
+        border-color: #000;
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 16px;
+        width: 100%;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+        background-color: #333;
+        border-color: #333;
+    }
+    .alert {
+        margin-bottom: 20px;
+        text-align: center;
+        background-color: #eee;
+        color: #000;
+    }
+    .invalid-feedback {
+        font-size: 14px;
+        color: #a00;
+    }
+    a {
+        color: #000;
+        text-decoration: underline;
+    }
+    a:hover {
+        text-decoration: none;
+    }
+</style>
+
 </head>
 <body>
     <div class="wrapper">
