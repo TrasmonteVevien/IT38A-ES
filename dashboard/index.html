@@ -5,27 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Minimalist Dashboard</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Example Styles (you can move these to your CSS file) */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #333;
+            color: white;
+            height: 100vh;
+            padding-top: 20px;
+        }
+        .sidebar h2 {
+            text-align: center;
+            color: #fff;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar li {
+            padding: 15px;
+            cursor: pointer;
+        }
+        .sidebar li:hover {
+            background-color: #444;
+        }
+        .submenu {
+            display: none;
+            list-style-type: none;
+            padding-left: 20px;
+            background-color: #444;
+        }
+        .submenu li {
+            padding: 10px;
+        }
+        .sidebar li.active > .submenu {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+        /* Smooth transition */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="sidebar">
+    <nav class="sidebar">
         <h2>Dashboard</h2>
         <ul>
             <li>News</li>
-            <li class="has-submenu">Accounts
+            <li class="has-submenu" aria-expanded="false">Accounts
                 <ul class="submenu">
                     <li>Users</li>
-                    <li>Temp Users</li>
-                    <li>Total Number of Users</li>
+                    <li>Temp users</li>
+                    <li>Total Number of users</li>
                 </ul>
             </li>
         </ul>
-    </div>
+    </nav>
     <script>
         document.querySelectorAll('.has-submenu').forEach(item => {
             item.addEventListener('click', (e) => {
-             
                 e.stopPropagation();
+            
                 item.classList.toggle('active');
+                const isActive = item.classList.contains('active');
+                item.setAttribute('aria-expanded', isActive);
             });
         });
 
@@ -33,6 +90,7 @@
             if (!e.target.closest('.sidebar')) {
                 document.querySelectorAll('.has-submenu').forEach(item => {
                     item.classList.remove('active');
+                    item.setAttribute('aria-expanded', 'false');
                 });
             }
         });
