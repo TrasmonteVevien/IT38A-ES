@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 24, 2025 at 06:30 AM
+-- Generation Time: May 06, 2025 at 04:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,66 @@ SET time_zone = "+00:00";
 --
 -- Database: `trasic`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `applications`
+--
+
+CREATE TABLE `applications` (
+  `id` int(11) NOT NULL,
+  `job_seeker_id` int(11) DEFAULT NULL,
+  `job_offer_id` int(11) DEFAULT NULL,
+  `status` enum('applied','interviewed','hired','rejected') DEFAULT 'applied',
+  `application_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employers`
+--
+
+CREATE TABLE `employers` (
+  `id` int(11) NOT NULL,
+  `company_name` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `contact_email` varchar(255) DEFAULT NULL,
+  `company_address` varchar(255) DEFAULT NULL,
+  `status` enum('active','inactive') DEFAULT 'active',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `interview_schedules`
+--
+
+CREATE TABLE `interview_schedules` (
+  `id` int(11) NOT NULL,
+  `employer_id` int(11) DEFAULT NULL,
+  `job_seeker_id` int(11) DEFAULT NULL,
+  `interview_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `status` enum('pending','completed') DEFAULT 'pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `job_offer`
+--
+
+CREATE TABLE `job_offer` (
+  `id` int(11) NOT NULL,
+  `employer_id` int(11) DEFAULT NULL,
+  `position` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `location` enum('Bukidnon','Manolo') DEFAULT NULL,
+  `status` enum('open','closed') DEFAULT 'open'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -66,28 +126,74 @@ INSERT INTO `job_offers` (`id`, `company_name`, `position_title`, `location`, `j
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `job_seekers`
+--
+
+CREATE TABLE `job_seekers` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `resume_path` varchar(255) DEFAULT NULL,
+  `status` enum('active','inactive') DEFAULT 'active',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `created_at` datetime DEFAULT current_timestamp()
+  `role` enum('job_seeker','employer') NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `birthday` date DEFAULT NULL,
+  `address` text DEFAULT NULL,
+  `contacts` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `company_name` varchar(255) DEFAULT NULL,
+  `profile_picture` varchar(255) DEFAULT NULL,
+  `resume` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `username`, `password`, `created_at`) VALUES
-(1, 'HEHE', '$2y$10$9Q4eSxHrJs66BpJfn//YHOw1ixn4QxJ3.HFXc6NsoYw0NgyrfAJna', '2025-03-13 17:45:46'),
-(2, 'mar', '$2y$10$2WnDfpSOZyCVzO2f6U2XJeavRqru7pCSmTXfZHJqgnpiF90k61R4u', '2025-03-13 18:46:33'),
-(3, 'althia', '$2y$10$Ur7mFdRF3SsxyZt9vLWAmeh.2PET.9wHPXiMXKTVrtr45OpT8iZVK', '2025-03-24 13:01:18');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `applications`
+--
+ALTER TABLE `applications`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `job_seeker_id` (`job_seeker_id`),
+  ADD KEY `job_offer_id` (`job_offer_id`);
+
+--
+-- Indexes for table `employers`
+--
+ALTER TABLE `employers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `interview_schedules`
+--
+ALTER TABLE `interview_schedules`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `employer_id` (`employer_id`),
+  ADD KEY `job_seeker_id` (`job_seeker_id`);
+
+--
+-- Indexes for table `job_offer`
+--
+ALTER TABLE `job_offer`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `employer_id` (`employer_id`);
 
 --
 -- Indexes for table `job_offers`
@@ -96,15 +202,44 @@ ALTER TABLE `job_offers`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `job_seekers`
+--
+ALTER TABLE `job_seekers`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `applications`
+--
+ALTER TABLE `applications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `employers`
+--
+ALTER TABLE `employers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `interview_schedules`
+--
+ALTER TABLE `interview_schedules`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `job_offer`
+--
+ALTER TABLE `job_offer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `job_offers`
@@ -113,10 +248,40 @@ ALTER TABLE `job_offers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
+-- AUTO_INCREMENT for table `job_seekers`
+--
+ALTER TABLE `job_seekers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `applications`
+--
+ALTER TABLE `applications`
+  ADD CONSTRAINT `applications_ibfk_1` FOREIGN KEY (`job_seeker_id`) REFERENCES `job_seekers` (`id`),
+  ADD CONSTRAINT `applications_ibfk_2` FOREIGN KEY (`job_offer_id`) REFERENCES `job_offers` (`id`);
+
+--
+-- Constraints for table `interview_schedules`
+--
+ALTER TABLE `interview_schedules`
+  ADD CONSTRAINT `interview_schedules_ibfk_1` FOREIGN KEY (`employer_id`) REFERENCES `employers` (`id`),
+  ADD CONSTRAINT `interview_schedules_ibfk_2` FOREIGN KEY (`job_seeker_id`) REFERENCES `job_seekers` (`id`);
+
+--
+-- Constraints for table `job_offer`
+--
+ALTER TABLE `job_offer`
+  ADD CONSTRAINT `job_offer_ibfk_1` FOREIGN KEY (`employer_id`) REFERENCES `employers` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
